@@ -1,7 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { UPARoutes } from './sistema-upa';
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+    path: '',
+    redirectTo: '/cadastrar',
+    pathMatch: 'full',
+  },
+  ...UPARoutes
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
