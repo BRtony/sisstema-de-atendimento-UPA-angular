@@ -21,6 +21,8 @@ import { MatSortModule } from '@angular/material/sort';
 import { UpaService } from './shared';
 import { AppRoutingModule } from '../app-routing.module';
 import { EditarAtendimentoComponent } from './editar-atendimento/editar-atendimento.component';
+import { isActiveDirective } from './shared/atendimento-isActive.directive';
+import { concluidoDirective } from './shared/atendimento-concluido.directive';
 
 
 @NgModule({
@@ -28,7 +30,9 @@ import { EditarAtendimentoComponent } from './editar-atendimento/editar-atendime
     HeaderComponent,
     CadastrarAtendimentoComponent,
     ListarAtendimentosComponent,
-    EditarAtendimentoComponent
+    EditarAtendimentoComponent,
+    isActiveDirective,
+    concluidoDirective
   ],
   imports: [
     CommonModule,

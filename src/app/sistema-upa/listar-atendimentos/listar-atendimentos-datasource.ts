@@ -108,6 +108,8 @@ export class ListarAtendimentosDataSource extends DataSource<Upa> {
         case 'sobrenome': return compare(a.sobrenome, b.sobrenome, isAsc);
         case 'priority': return compare(a.priority, b.priority, isAsc);
         case 'observacoes': return compare(a.observacoes, b.observacoes, isAsc);
+        case 'sintomas': return compare(a.sintomas, b.sintomas, isAsc);
+        case 'concluido' : return compare(a.concluido, b.concluido, isAsc);
         case 'id': return compare(+a.id, +b.id, isAsc);
         default: return 0;
       }
@@ -116,6 +118,6 @@ export class ListarAtendimentosDataSource extends DataSource<Upa> {
 }
 
 /** Simple sort comparator for example ID/Name columns (for client-side sorting). */
-function compare(a: string | number, b: string | number, isAsc: boolean): number {
+function compare(a: string | number | boolean, b: string | number | boolean, isAsc: boolean): number {
   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }

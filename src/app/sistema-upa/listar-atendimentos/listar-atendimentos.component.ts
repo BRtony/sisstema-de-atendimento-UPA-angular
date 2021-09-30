@@ -18,7 +18,7 @@ export class ListarAtendimentosComponent implements AfterViewInit, OnInit {
   atendimentos: Upa[]
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['nome', 'sobrenome', 'priority', 'observacoes', 'botoes'];
+  displayedColumns = ['nome', 'sobrenome', 'priority', 'observacoes','sintomas', 'concluido','botoes'];
 
   constructor(
     private upaService: UpaService
@@ -40,19 +40,15 @@ export class ListarAtendimentosComponent implements AfterViewInit, OnInit {
   }
 
   alterarStatus(atendimento: Upa): void {
-    if(confirm(`Deseja alterar o status do paciente "${atendimento.nome}"?`)){
+    if(confirm(`Deseja concluir o atendimento de "${atendimento.nome}"?`)){
       this.upaService.alterarStatus(atendimento.id);
       this.atendimentos = this.listarTodos();
     } else {
       this.atendimentos = this.listarTodos();
     }
   }
-
-  remover($event: any, atendimento: Upa): void {
-    $event.preventDefault();
-    if(confirm(`Deseja alterar o status de atendimento de "${atendimento.nome}"?`)){
-      this.upaService.remover(atendimento.id);
+  concluido(atendimento: Upa): void {
+      this.upaService.concluido(atendimento.id);
       this.atendimentos = this.listarTodos();
-    }
   }
 }

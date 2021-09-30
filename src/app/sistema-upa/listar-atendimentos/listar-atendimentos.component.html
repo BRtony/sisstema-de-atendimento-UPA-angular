@@ -1,24 +1,26 @@
 <div class="mat-elevation-z8">
   <table mat-table class="full-width-table" matSort aria-label="Elements">
+    
     <!-- Id Column -->
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
       <td mat-cell *matCellDef="let row">{{row.id}}</td>
     </ng-container>
 
+    
     <!-- Nome Column -->
     <ng-container matColumnDef="nome">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>
-      <td mat-cell *matCellDef="let row">{{row.nome}}</td>
+      <th  mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>
+      <td  mat-cell *matCellDef="let row, let atendimento" [concluido]="atendimento.concluido">{{row.nome}}</td>
     </ng-container>
-
+    
     <!-- Sobrenome Column -->
     <ng-container matColumnDef="sobrenome">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Sobrenome</th>
       <td mat-cell *matCellDef="let row">{{row.sobrenome}}</td>
     </ng-container>
 
-    <!-- Sobrenome Column -->
+    <!-- Symptoms Column -->
     <ng-container matColumnDef="sintomas">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Sintomas</th>
       <td mat-cell *matCellDef="let row">{{row.sintomas}}</td>
@@ -36,6 +38,19 @@
       <td mat-cell *matCellDef="let row">{{row.observacoes}}</td>
     </ng-container>
 
+    <!-- Status Column -->
+    <ng-container matColumnDef="concluido">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Atendido</th>
+      <td mat-cell *matCellDef="let row, let atendimento of atendimentos">
+          <input  
+          type="checkbox"
+          [value]="atendimento.id" 
+          [checked]="atendimento.concluido"
+          (click)="concluido(atendimento)"
+          >
+      </td>
+    </ng-container>
+
     <!-- Action Column-->
     <ng-container matColumnDef="botoes">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Ação</th>
@@ -48,7 +63,7 @@
         </mat-icon>
         </a>
         <a href="#" title="Remover" alt="Remover"
-        (click)="remover($event, atendimento)">
+        (click)="alterarStatus(atendimento)">
         <mat-icon>
           delete
         </mat-icon>
@@ -57,7 +72,7 @@
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-row *matRowDef="let row, let atendimento of atendimentos; columns: displayedColumns;" [isActive]="!atendimento.isActive" ></tr>
   </table>
 
   <mat-paginator #paginator

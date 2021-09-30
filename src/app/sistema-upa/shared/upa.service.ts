@@ -32,17 +32,26 @@ export class UpaService {
     localStorage['atendimentos'] = JSON.stringify(atendimentos);
   }
 
-  remover(id: number): void {
-    let atendimentos: Upa[] = this.listarTodos();
-    atendimentos = atendimentos.filter(atendimento => atendimento.id !== id);
-    localStorage['atendimentos'] = JSON.stringify(atendimentos)
-  }
+  // remover(id: number): void {
+  //   let atendimentos: Upa[] = this.listarTodos();
+  //   atendimentos = atendimentos.filter(atendimento => atendimento.id !== id);
+  //   localStorage['atendimentos'] = JSON.stringify(atendimentos)
+  // }
 
   alterarStatus(id: number): void {
     const atendimentos: Upa[] = this.listarTodos();
     atendimentos.forEach((obj, index, objs) => {
       if (id === obj.id) {
         objs[index].isActive = !obj.isActive;
+      }
+    });
+    localStorage['atendimentos'] = JSON.stringify(atendimentos);
+  }
+  concluido(id: number): void {
+    const atendimentos: Upa[] = this.listarTodos();
+    atendimentos.forEach((obj, index, objs) => {
+      if (id === obj.id) {
+        objs[index].concluido = !obj.concluido;
       }
     });
     localStorage['atendimentos'] = JSON.stringify(atendimentos);

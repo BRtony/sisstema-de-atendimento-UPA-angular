@@ -12,7 +12,8 @@ export class Upa {
         public sintomas?: string,
         public observacoes?: string,
         public priority?: string,
-        public isActive?: boolean,
+        public isActive: boolean = true,
+        public concluido: boolean = false
 
     ){}
 }

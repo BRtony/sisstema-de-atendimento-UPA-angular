@@ -9,6 +9,7 @@ import { Upa, UpaService } from '../shared';
   styleUrls: ['./cadastrar-atendimento.component.css']
 })
 export class CadastrarAtendimentoComponent implements OnInit {
+  
   addressForm = this.fb.group({
     company: [null, Validators.required],
     firstName: [null, Validators.required],
@@ -20,7 +21,7 @@ export class CadastrarAtendimentoComponent implements OnInit {
     postalCode: [null, Validators.compose([
       Validators.required, Validators.minLength(5), Validators.maxLength(5)])
     ],
-    priority: ['normal', Validators.required],
+    priority: ['Normal', Validators.required],
     sintomas: [null, Validators.required],
     observacoes: null
   });
@@ -65,8 +66,9 @@ export class CadastrarAtendimentoComponent implements OnInit {
     ];
 
     @ViewChild('formAtd', {static: true}) formAtd: NgForm;
-    atendimento: Upa;
 
+    atendimento: Upa;
+    isActive: boolean = true;
   constructor(
     private fb: FormBuilder, 
     private upaService: UpaService,
@@ -76,9 +78,7 @@ export class CadastrarAtendimentoComponent implements OnInit {
     ngOnInit() {
       this.atendimento = new Upa()
     }
-    // onSubmit(): void {
-    // return this.cadastrar()
-    // }
+    
     cadastrar(): void {
       if (this.formAtd.form.valid) {
         this.upaService.cadastrar(this.atendimento);
