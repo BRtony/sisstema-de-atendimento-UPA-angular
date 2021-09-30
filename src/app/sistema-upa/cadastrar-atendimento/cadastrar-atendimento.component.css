@@ -2,9 +2,9 @@
   width: 100%;
 }
 
-.shipping-card {
+.customer-card {
   min-width: 120px;
-  margin: 20px auto;
+  padding: 20px auto;
 }
 
 .mat-radio-button {

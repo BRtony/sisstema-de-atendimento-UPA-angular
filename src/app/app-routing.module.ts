@@ -5,7 +5,7 @@ import { UPARoutes } from './sistema-upa';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/cadastrar',
+    redirectTo: 'atendimento/listar',
     pathMatch: 'full',
   },
   ...UPARoutes

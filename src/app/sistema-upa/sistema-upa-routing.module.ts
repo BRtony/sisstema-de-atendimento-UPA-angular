@@ -1,21 +1,23 @@
 import { Routes } from '@angular/router';
 import { CadastrarAtendimentoComponent } from './cadastrar-atendimento';
+import { EditarAtendimentoComponent } from './editar-atendimento';
+import { ListarAtendimentosComponent } from './listar-atendimentos';
 
 export const UPARoutes: Routes = [
     {
-        path: 'cadastro',
-        redirectTo: 'cadastrar'
+        path: 'atendimento',
+        redirectTo: 'atendimento/listar'
     },
-    // {
-    //     path: 'tarefas/listar',
-    //     component: ListarTarefaComponent
-    // },
     {
-        path: 'cadastrar',
+        path: 'atendimento/listar',
+        component: ListarAtendimentosComponent
+    },
+    {
+        path: 'atendimento/cadastrar',
         component: CadastrarAtendimentoComponent
     },
-    // {
-    //     path: 'tarefas/editar/:id',
-    //     component: EditarTarefaComponent
-    // }
+    {
+        path: 'atendimento/editar/:id',
+        component: EditarAtendimentoComponent
+    }
 ];

@@ -1,14 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, NgForm, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Upa, UpaService } from '../shared';
 
 @Component({
-  selector: 'app-cadastrar-atendimento',
-  templateUrl: './cadastrar-atendimento.component.html',
-  styleUrls: ['./cadastrar-atendimento.component.css']
+  selector: 'app-editar-atendimento',
+  templateUrl: './editar-atendimento.component.html',
+  styleUrls: ['./editar-atendimento.component.css']
 })
-export class CadastrarAtendimentoComponent implements OnInit {
+export class EditarAtendimentoComponent implements OnInit {
   addressForm = this.fb.group({
     company: [null, Validators.required],
     firstName: [null, Validators.required],
@@ -24,16 +24,13 @@ export class CadastrarAtendimentoComponent implements OnInit {
     sintomas: [null, Validators.required],
     observacoes: null
   });
-
   hasUnitNumber = false;
-
   companies = [
     {name: 'Rua dos Alfeneiros, 4, Little Whinging', abbreviation: 'U04'},
     {name: 'Rua dos Alfeneiros, 3, Little Whinging', abbreviation: 'U03'},
     {name: 'Rua dos Alfeneiros, 2, Little Whinging', abbreviation: 'U02'},
     {name: 'Rua dos Alfeneiros, 1, Little Whinging', abbreviation: 'U01'},
   ]
-
   states = [
     { abbreviation: 'AC', name: 'Acre' },
     { abbreviation: 'AL', name: 'Alagoas' },
@@ -64,28 +61,25 @@ export class CadastrarAtendimentoComponent implements OnInit {
     { abbreviation: 'TO', name: 'Tocantins' },
     ];
 
-    @ViewChild('formAtd', {static: true}) formAtd: NgForm;
+  @ViewChild('formAtd', {static: true}) formAtd: NgForm;
     atendimento: Upa;
 
   constructor(
-    private fb: FormBuilder, 
+    private fb: FormBuilder,
     private upaService: UpaService,
+    private route: ActivatedRoute,
     private router: Router
-    ) {}
-  
-    ngOnInit() {
-      this.atendimento = new Upa()
+  ) { }
+
+  ngOnInit(): void {
+    const id = +this.route.snapshot.params['id'];
+    this.atendimento = this.upaService.buscarPorId(id);
+  }
+  atualizar(): void {
+    if (this.formAtd.form.valid) {
+      this.upaService.atualizar(this.atendimento);
+      this.router.navigate(['/atendimento'])
     }
-    // onSubmit(): void {
-    // return this.cadastrar()
-    // }
-    cadastrar(): void {
-      if (this.formAtd.form.valid) {
-        this.upaService.cadastrar(this.atendimento);
-        alert('Obrigado!');
-        this.router.navigate(["/atendimento"]);
-      }
-    }
+  }
 
 }
-

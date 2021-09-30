@@ -7,22 +7,32 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { HeaderComponent } from './templates/header/header.component';
+import { ListarAtendimentosComponent } from './listar-atendimentos/listar-atendimentos.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { UpaService } from './shared';
+import { AppRoutingModule } from '../app-routing.module';
+import { EditarAtendimentoComponent } from './editar-atendimento/editar-atendimento.component';
 
 
 @NgModule({
   declarations: [
+    HeaderComponent,
     CadastrarAtendimentoComponent,
-    HeaderComponent
+    ListarAtendimentosComponent,
+    EditarAtendimentoComponent
   ],
   imports: [
     CommonModule,
+    AppRoutingModule,
     MatInputModule,
     MatButtonModule,
     MatSelectModule,
@@ -33,10 +43,17 @@ import { HeaderComponent } from './templates/header/header.component';
     MatToolbarModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    FormsModule
   ],
   exports: [
-    HeaderComponent
+    HeaderComponent,
+  ],
+  providers: [
+    UpaService
   ]
 })
 export class SistemaUpaModule { }
